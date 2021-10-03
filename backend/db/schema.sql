@@ -85,7 +85,6 @@ CREATE TABLE usersAdresses (
     houseNumber INT,
     additionDescreption VARCHAR(255),
     PRIMARY KEY (userId)
-
 );
 
 INSERT INTO categories (categoryName ) VALUES ("Burgers");
