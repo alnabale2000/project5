@@ -20,8 +20,11 @@ CREATE TABLE resturants(
     resturantName varchar(255),
     adress varchar(255),
     plates varchar(255),
-    rates varchar(255),
     phoneNumber int,
+    email varchar(255),
+    pass varchar(255),
+    createdAt DATETIME
+    rates double(2,1) DEFAULT 0,
     PRIMARY KEY (id)
 );
 
