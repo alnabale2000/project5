@@ -42,7 +42,7 @@ CREATE TABLE meals (
     category_id INT ,
     mealName varchar(255),
     mealImage varchar(255),
-    price varchar(255),
+    price double(3,2),
     details varchar(255),
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
