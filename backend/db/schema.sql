@@ -23,7 +23,7 @@ CREATE TABLE resturants(
     phoneNumber int,
     email varchar(255),
     pass varchar(255),
-    createdAt DATETIME
+    createdAt DATETIME,
     rates double(2,1) DEFAULT 0,
     PRIMARY KEY (id)
 );
