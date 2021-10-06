@@ -30,7 +30,7 @@ const addToCart = (req, res) => {
 
 const getCartOrdersByUserId = (req, res) => {
     const id = req.params.id;
-    const query = `SELECT mealName,Qty,price FROM users_cart WHERE userId =?`;
+    const query = `SELECT * FROM users_cart WHERE userId =?`;
     const data = [id];
 
     connection.query(query, data, (err, result) => {
@@ -45,7 +45,18 @@ const clearCartOrders = (req, res) => {
     const data = [id];
     connection.query(query, data, (err, result) => {
         if (err) console.log(err);
-        res.json(result);
+        res.json("Cart Clear Successfully");
+    });
+};
+
+const clearSingleCartOrder = (req, res) => {
+    console.log("t");
+    const id = req.body.id;
+    const query = `DELETE FROM users_cart WHERE id =?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) console.log(err);
+        res.json("Order Deleted Successfully");
     });
 };
 
@@ -53,4 +64,5 @@ module.exports = {
     addToCart,
     getCartOrdersByUserId,
     clearCartOrders,
+    clearSingleCartOrder,
 };
