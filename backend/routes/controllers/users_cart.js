@@ -60,23 +60,9 @@ const clearSingleCartOrder = (req, res) => {
     });
 };
 
-const addAddress = (req, res) => {
-    const id = req.params.id;
-    const { city, neighborhood, houseNumber, additionDescreption } = req.body;
-    const query = `
-    INSERT INTO users_adresses (userId,city,neighborhood,houseNumber,additionDescreption)
-    VALUES (?,?,?,?,?)`;
-    const data = [id, city, neighborhood, houseNumber, additionDescreption];
-    connection.query(query, data, (err, result) => {
-        if (err) console.log(err);
-        res.status(201).json("Address Added Successfully");
-    });
-};
-
 module.exports = {
     addToCart,
     getCartOrdersByUserId,
     clearCartOrders,
     clearSingleCartOrder,
-    addAddress,
 };

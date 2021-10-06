@@ -83,14 +83,13 @@ CREATE TABLE users_cart (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE users_adresses (
-    id INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE users_address (
     userId INT NOT NULL,
     city VARCHAR(255),
     neighborhood varchar(255),
     houseNumber INT,
     additionDescreption VARCHAR(255),
-    PRIMARY KEY (id)
+    PRIMARY KEY (userId)
 );
 
 
