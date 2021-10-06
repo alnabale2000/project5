@@ -74,12 +74,13 @@ CREATE TABLE orders(
 );
 
 CREATE TABLE users_cart (
+    id INT AUTO_INCREMENT NOT NULL,
     userId INT NOT NULL,
     resturant_id INT,
     mealName VARCHAR(255),
     Qty INT,
     price DOUBLE(3,2),
-    PRIMARY KEY (userId,mealName)
+    PRIMARY KEY (id)
 
 );
 

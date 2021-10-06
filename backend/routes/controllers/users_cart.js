@@ -7,17 +7,23 @@ const addToCart = (req, res) => {
     const query0 = `SELECT resturant_id FROM users_cart WHERE userId=?;`;
     const data0 = [userId];
 
+    const addOrder = () => {
+        const query = `INSERT INTO users_cart(userId,resturant_id,mealName,Qty,price)VALUES (?,?,?,?,?);`;
+        const data = [userId, id, mealName, Qty, price];
+
+        connection.query(query, data, (err, result) => {
+            if (err) console.log(err);
+            res.status(201).json("Order Added");
+        });
+    };
+
     connection.query(query0, data0, (err, result) => {
-        if (result[0].resturant_id != id)
+        if (!result[0]) {
+            addOrder();
+        } else if (result[0].resturant_id != id)
             res.json("Cant Add Order(clear the latest orders from your cart)");
         else {
-            const query = `INSERT INTO users_cart(userId,resturant_id,mealName,Qty,price)VALUES (?,?,?,?,?);`;
-            const data = [userId, id, mealName, Qty, price];
-
-            connection.query(query, data, (err, result) => {
-                if (err) console.log(err);
-                res.status(201).json("Order Added");
-            });
+            addOrder();
         }
     });
 };
@@ -33,7 +39,18 @@ const getCartOrdersByUserId = (req, res) => {
     });
 };
 
+const clearCartOrders = (req, res) => {
+    const id = req.params.id;
+    const query = `DELETE FROM users_cart WHERE userId=?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) console.log(err);
+        res.json(result);
+    });
+};
+
 module.exports = {
     addToCart,
     getCartOrdersByUserId,
+    clearCartOrders,
 };
