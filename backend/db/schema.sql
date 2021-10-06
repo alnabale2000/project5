@@ -61,7 +61,7 @@ CREATE TABLE orders(
     id int AUTO_INCREMENT NOT NULL,
     mealImage VARCHAR(255),
     mealName VARCHAR(255),
-    mealPrice VARCHAR(255),
+    mealPrice DOUBLE (3,2),
     Qty INT,
     totalPrice VARCHAR(255),
     orderDateTime DATE,
@@ -73,13 +73,13 @@ CREATE TABLE orders(
 
 );
 
-CREATE TABLE usersCart (
+CREATE TABLE users_cart (
     userId INT NOT NULL,
     resturant_id INT,
     mealName VARCHAR(255),
     Qty INT,
-    price VARCHAR(255),
-    PRIMARY KEY (userId)
+    price DOUBLE(3,2),
+    PRIMARY KEY (userId,mealName)
 
 );
 
