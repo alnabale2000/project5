@@ -24,7 +24,7 @@ CREATE TABLE resturants(
     email varchar(255),
     pass varchar(255),
     createdAt DATETIME,
-    rates double(2,1) DEFAULT 0,
+    rates double (2,1) DEFAULT 0,
     PRIMARY KEY (id)
 );
 
@@ -52,7 +52,9 @@ CREATE TABLE comments (
     id int AUTO_INCREMENT NOT NULL,
     comment VARCHAR(255),
     commenter VARCHAR(255),
-    PRIMARY KEY (id)
+    resturant_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (resturant_id) REFERENCES resturants(id)
 );
 
 CREATE TABLE orders(
@@ -89,9 +91,5 @@ CREATE TABLE usersAdresses (
     additionDescreption VARCHAR(255),
     PRIMARY KEY (userId)
 );
-
-INSERT INTO categories (categoryName ) VALUES ("Burgers");
--- INSERT INTO books (title ,author,puplished_at ,price) VALUES ("Moneyball","hardy","28-8-2021","5");
--- INSERT INTO books (title ,author,puplished_at ,price) VALUES ("React js","Mosh","20-8-2000","50");
 
 

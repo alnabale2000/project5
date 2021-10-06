@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const createNewResturant = async (req, res) => {
     const { resturantImage, resturantName, adress, plates, phoneNumber, email, password } =
         req.body;
+    const rates = [4, 3];
 
     try {
         const date = new Date();
