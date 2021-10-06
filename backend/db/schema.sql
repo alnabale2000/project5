@@ -81,16 +81,16 @@ CREATE TABLE users_cart (
     Qty INT,
     price DOUBLE(3,2),
     PRIMARY KEY (id)
-
 );
 
-CREATE TABLE usersAdresses (
+CREATE TABLE users_adresses (
+    id INT AUTO_INCREMENT NOT NULL,
     userId INT NOT NULL,
     city VARCHAR(255),
     neighborhood varchar(255),
     houseNumber INT,
     additionDescreption VARCHAR(255),
-    PRIMARY KEY (userId)
+    PRIMARY KEY (id)
 );
 
 
