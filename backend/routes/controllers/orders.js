@@ -4,7 +4,6 @@ const connection = require("./../../db/db");
 const sendOrderToResturant = async (req, res) => {
     const id = req.params.id;
     const date = new Date();
-    console.log("t");
 
     const {
         mealName,
@@ -78,8 +77,22 @@ const rateRestaurant = async (req, res) => {
     });
 };
 
+const getOrdersByResId = (req, res) => {
+    const id = req.params.id;
+    const query = `
+    SELECT * FROM orders 
+    WHERE resturant_id=? 
+    ORDER BY orderDateTime ASC;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) return res.status(404).json(err);
+        res.status(200).json(result);
+    });
+};
+
 module.exports = {
     sendOrderToResturant,
     getOrdersByLoggedInUserId,
     rateRestaurant,
+    getOrdersByResId,
 };
