@@ -59,14 +59,17 @@ CREATE TABLE comments (
 
 CREATE TABLE orders(
     id int AUTO_INCREMENT NOT NULL,
-    mealImage VARCHAR(255),
     mealName VARCHAR(255),
-    mealPrice DOUBLE (3,2),
+    mealPrice double,
     Qty INT,
-    totalPrice VARCHAR(255),
-    orderDateTime DATE,
-    userLocation VARCHAR(255),
+    totalPrice double,
+    orderDateTime DATETIME,
+    city VARCHAR(255),
+    neighborhood varchar(255),
+    house_number INT,
+    additional_descreption VARCHAR(255),    
     username VARCHAR(255),
+    phone_number BIGINT,
     resturant_id INT,
     userId INT ,
     PRIMARY KEY (id)
@@ -87,9 +90,16 @@ CREATE TABLE users_address (
     userId INT NOT NULL,
     city VARCHAR(255),
     neighborhood varchar(255),
-    houseNumber INT,
-    additionDescreption VARCHAR(255),
+    house_number INT,
+    additional_descreption VARCHAR(255),
     PRIMARY KEY (userId)
+);
+
+CREATE TABLE rates (
+    id INT AUTO_INCREMENT NOT NULL,
+    resturant_id INT,
+    rate INT,
+    PRIMARY KEY(id)
 );
 
 

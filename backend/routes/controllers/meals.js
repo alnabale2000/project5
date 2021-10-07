@@ -8,8 +8,8 @@ const addMeal = (req, res) => {
     VALUES (?,?,?,?,?);`;
     const data = [id, mealName, mealImage, price, details];
     connection.query(query, data, (err, result) => {
+        if (err) return res.status(404).json(err);
         res.status(201).json("Meal Added");
-        console.log(err);
     });
 };
 

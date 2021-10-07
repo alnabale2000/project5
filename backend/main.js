@@ -12,6 +12,7 @@ const mealsRouter = require("./routes/routers/meals");
 const commentsRouter = require("./routes/routers/comments");
 const usersCartRouter = require("./routes/routers/users_cart");
 const usersAddressRouter = require("./routes/routers/users_address");
+const ordersRouter = require("./routes/routers/orders");
 
 //ResturantsRouter
 app.use(usersRouter);
@@ -22,6 +23,7 @@ app.use(mealsRouter);
 app.use(commentsRouter);
 app.use(usersCartRouter);
 app.use(usersAddressRouter);
+app.use(ordersRouter);
 
 const PORT = 5000;
 app.listen(PORT, () => {

@@ -6,6 +6,7 @@ const {
     searchByName,
     getNewAddedResturant,
     getResturantDataById,
+    getTotalRate,
 } = require("./../controllers/resturants");
 
 const ResturantsRouter = express.Router();
@@ -15,6 +16,6 @@ ResturantsRouter.get("/resturants", getAllResturants);
 ResturantsRouter.get("/resturants/:name", searchByName);
 ResturantsRouter.get("/", getNewAddedResturant);
 ResturantsRouter.get("/resturant/:id", getResturantDataById);
-// ResturantsRouter.get("/resturant/:id", getResturantDataById);
+ResturantsRouter.get("/resturant/:id/rate", getTotalRate);
 
 module.exports = ResturantsRouter;

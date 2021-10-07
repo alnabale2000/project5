@@ -25,6 +25,7 @@ const createNewResturant = async (req, res) => {
         ];
 
         connection.query(query, data, (err, result) => {
+            if (err) res.status(404).json(err);
             res.status(201).json("Resturant Added");
         });
     } catch (error) {
@@ -42,6 +43,7 @@ const getAllResturants = (req, res) => {
     ;`;
 
     connection.query(query, (err, result) => {
+        if (err) res.status(404).json(err);
         res.status(200).json(result);
     });
 };
@@ -52,6 +54,7 @@ const searchByName = (req, res) => {
     FROM resturants
     WHERE resturantName LIKE N'%${resturantName}%'`;
     connection.query(query, (err, result) => {
+        if (err) res.status(404).json(err);
         res.json(result);
     });
 };
@@ -61,6 +64,7 @@ const getNewAddedResturant = (req, res) => {
     FROM resturants
     ORDER BY createdAt DESC LIMIT 3;`;
     connection.query(query, (err, result) => {
+        if (err) res.status(404).json(err);
         res.status(200).json(result);
     });
 };
@@ -72,13 +76,28 @@ const getResturantDataById = (req, res) => {
     WHERE id=?;`;
     const data = [id];
     connection.query(query, data, (err, result) => {
+        if (err) res.status(404).json(err);
         res.status(200).json(result);
     });
 };
+
+const getTotalRate = (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT AVG(rate) FROM rates WHERE resturant_id=?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) res.status(404).json(err);
+
+        const num = parseFloat(result[0]["AVG(rate)"]);
+        res.status(200).json(num.toFixed(1));
+    });
+};
+
 module.exports = {
     createNewResturant,
     getAllResturants,
     searchByName,
     getNewAddedResturant,
     getResturantDataById,
+    getTotalRate,
 };

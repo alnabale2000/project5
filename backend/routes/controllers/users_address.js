@@ -9,7 +9,7 @@ const addAddress = (req, res) => {
     VALUES (?,?,?,?,?)`;
     const data = [id, city, neighborhood, houseNumber, additionDescreption];
     connection.query(query, data, (err, result) => {
-        // if (err) console.log(err);
+        if (err) res.json(err);
         if (!result) res.json("Delete The Old Address And Try Again");
         else {
             res.status(201).json("Address Added Successfully ");

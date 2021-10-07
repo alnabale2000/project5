@@ -12,7 +12,7 @@ const addToCart = (req, res) => {
         const data = [userId, id, mealName, Qty, price];
 
         connection.query(query, data, (err, result) => {
-            if (err) console.log(err);
+            if (err) res.json(err);
             res.status(201).json("Order Added");
         });
     };
