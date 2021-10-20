@@ -90,9 +90,20 @@ const getOrdersByResId = (req, res) => {
     });
 };
 
+const deleteOrder = (req, res) => {
+    const id = req.body.id;
+    const query = `DELETE FROM orders WHERE id =?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) return res.status(404).json(err);
+        res.status(200).json("Order Deleted");
+    });
+};
+
 module.exports = {
     sendOrderToResturant,
     getOrdersByLoggedInUserId,
     rateRestaurant,
     getOrdersByResId,
+    deleteOrder,
 };

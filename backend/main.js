@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
@@ -13,8 +14,10 @@ const commentsRouter = require("./routes/routers/comments");
 const usersCartRouter = require("./routes/routers/users_cart");
 const usersAddressRouter = require("./routes/routers/users_address");
 const ordersRouter = require("./routes/routers/orders");
+const corsOptions = { origin: "*", credentials: true };
 
-//ResturantsRouter
+app.use(cors(corsOptions));
+
 app.use(usersRouter);
 app.use(authRouter);
 app.use(ResturantsRouter);

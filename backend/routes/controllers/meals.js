@@ -13,6 +13,18 @@ const addMeal = (req, res) => {
     });
 };
 
+const deleteMeal = (req, res) => {
+    const id = req.body.id;
+    const query = `DELETE FROM meals WHERE id =?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) res.status(404).json(err);
+        console.log(result);
+        res.json("Meal Deleted");
+    });
+};
+
 module.exports = {
     addMeal,
+    deleteMeal,
 };

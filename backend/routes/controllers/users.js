@@ -10,6 +10,7 @@ const createNewAccount = async (req, res) => {
         const data = [username, email.toLowerCase(), hashedPassword, phoneNumber];
 
         connection.query(query, data, (err, result) => {
+            if (err) res.status(404).json(err);
             res.status(201).json("User Added");
         });
     } catch (error) {
@@ -18,6 +19,32 @@ const createNewAccount = async (req, res) => {
     }
 };
 
+const getUserData = (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM users WHERE userId=?;`;
+    const data = [id];
+    connection.query(query, data, (err, result) => {
+        if (err) res.status(404).json(err);
+        res.status(200).json(result);
+    });
+};
+
+const editEmailAndPass = async (req, res) => {
+    const id = req.params.id;
+    const newEmail = req.body.newEmail;
+    const newPassword = req.body.newPassword;
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    const query = `UPDATE users SET email=?,pass=? WHERE userId =?`;
+    const data = [newEmail, hashedPassword, id];
+    connection.query(query, data, (err, result) => {
+        if (err) res.status(404).json(err);
+        res.status(200).json(result);
+    });
+};
+
 module.exports = {
     createNewAccount,
+    getUserData,
+    editEmailAndPass,
 };

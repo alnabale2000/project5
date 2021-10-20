@@ -38,8 +38,8 @@ const getAllResturants = (req, res) => {
     const rateFilter = req.body.rateFilter || 0;
     const query = `SELECT resturantImage,resturantName,plates,rates
     FROM resturants 
-    WHERE rates >=${rateFilter}
-    ORDER BY createdAt ${timeSort}
+    WHERE rates >=${rateFilter ? rateFilter : 0}
+    ORDER BY createdAt ${timeSort ? timeSort : "DESC"}
     ;`;
 
     connection.query(query, (err, result) => {
@@ -60,7 +60,7 @@ const searchByName = (req, res) => {
 };
 
 const getNewAddedResturant = (req, res) => {
-    const query = `SELECT resturantImage,resturantName,plates,rates 
+    const query = `SELECT id , resturantImage,resturantName,plates,rates 
     FROM resturants
     ORDER BY createdAt DESC LIMIT 3;`;
     connection.query(query, (err, result) => {
