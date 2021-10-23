@@ -34,9 +34,11 @@ const createNewResturant = async (req, res) => {
     }
 };
 const getAllResturants = (req, res) => {
-    const timeSort = req.body.timeSort;
-    const rateFilter = req.body.rateFilter || 0;
-    const query = `SELECT resturantImage,resturantName,plates,rates
+    const timeSort = req.params.timeSort || "ASC";
+    const rateFilter = req.params.rateFilter || 0;
+    console.log("timeSort", timeSort);
+    console.log("rateFilter", rateFilter);
+    const query = `SELECT id,resturantImage,resturantName,plates,rates
     FROM resturants 
     WHERE rates >=${rateFilter ? rateFilter : 0}
     ORDER BY createdAt ${timeSort ? timeSort : "DESC"}
