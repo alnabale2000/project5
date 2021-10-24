@@ -25,7 +25,7 @@ const getCategoriesByResturantId = (req, res) => {
     });
 };
 const getMealsByCategoryId = (req, res) => {
-    const id = req.body.id;
+    const id = req.params.id;
     const query = `
     SELECT * FROM meals 
     WHERE category_id=?

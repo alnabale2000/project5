@@ -73,7 +73,7 @@ const getNewAddedResturant = (req, res) => {
 
 const getResturantDataById = (req, res) => {
     const id = req.params.id;
-    const query = `SELECT resturantImage,resturantName,plates,rates,adress,phoneNumber
+    const query = `SELECT id, resturantImage,resturantName,plates,rates,adress,phoneNumber
     FROM resturants 
     WHERE id=?;`;
     const data = [id];
