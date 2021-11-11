@@ -1,6 +1,8 @@
 const { query } = require("../../db/db");
 const connection = require("../../db/db");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
+const path = require("path");
 
 const createNewResturant = async (req, res) => {
     const { resturantImage, resturantName, adress, plates, phoneNumber, email, password } =

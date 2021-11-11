@@ -31,12 +31,15 @@ const getUserData = (req, res) => {
 
 const editEmailAndPass = async (req, res) => {
     const id = req.params.id;
-    const newEmail = req.body.newEmail;
-    const newPassword = req.body.newPassword;
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    const phoneNumber = req.body.phoneNumber;
+    // const confirmedPass = req.body.confirmedPass;
 
-    const query = `UPDATE users SET email=?,pass=? WHERE userId =?`;
-    const data = [newEmail, hashedPassword, id];
+    const hashedPassword = password.length > 40 ? password : await bcrypt.hash(password, 10);
+    const query = `UPDATE users SET username=?, email=?,pass=?,phoneNumber=? WHERE userId =?`;
+    const data = [username, email, hashedPassword, phoneNumber, id];
     connection.query(query, data, (err, result) => {
         if (err) res.status(404).json(err);
         res.status(200).json(result);

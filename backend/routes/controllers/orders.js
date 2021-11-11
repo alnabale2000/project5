@@ -60,20 +60,26 @@ const sendOrderToResturant = async (req, res) => {
 
 const getOrdersByLoggedInUserId = async (req, res) => {
     const id = req.params.id;
-    const query = `SELECT * FROM orders WHERE userId=?;`;
+    const query = `
+    SELECT orders.id,orders.mealName,
+    orders.mealPrice,orders.totalPrice,orders.Qty,
+    orders.additional_descreption,orders.userId,orders.resturant_id ,
+    resturants.resturantName
+    FROM orders INNER JOIN resturants ON orders.resturant_id = resturants.id WHERE userId=?`;
     const data = [id];
+
     const getOrders = await connection.promise().query(query, data);
     if (!getOrders) return res.status(404).json(err);
     res.status(201).json(getOrders[0]);
 };
 
 const rateRestaurant = async (req, res) => {
-    const { rate, resturant_id } = req.body;
-    const query = `INSERT INTO rates(rate,resturant_id)VALUES (?,?);`;
-    const data = [rate, resturant_id];
+    const { rate, resturant_id, rater_id } = req.body;
+    const query = `INSERT INTO rates(rater_id,rate,resturant_id)VALUES (?,?,?);`;
+    const data = [rater_id, rate, resturant_id];
     connection.query(query, data, (err, result) => {
         if (err) return res.status(404).json(err);
-        res.status(201).json("Rated");
+        res.status(201).json(resturant_id);
     });
 };
 
@@ -91,13 +97,29 @@ const getOrdersByResId = (req, res) => {
 };
 
 const deleteOrder = (req, res) => {
-    const id = req.body.id;
+    const id = req.params.id;
     const query = `DELETE FROM orders WHERE id =?;`;
     const data = [id];
     connection.query(query, data, (err, result) => {
         if (err) return res.status(404).json(err);
-        res.status(200).json("Order Deleted");
+        res.status(200).json(id);
     });
+};
+
+const CheckRate = async (req, res) => {
+    const rater_id = req.params.id;
+    console.log("rater_id", rater_id);
+
+    const query = `SELECT resturant_id FROM rates WHERE rater_id=1 ;`;
+    const data = [rater_id];
+    const check = await connection.promise().query(query, data);
+    if (!check) return res.status(404).json(err);
+    const arr = [];
+    check[0].map((element) => {
+        arr.push(element.resturant_id);
+    });
+    console.log("arr", arr);
+    res.status(200).json(arr);
 };
 
 module.exports = {
@@ -106,4 +128,5 @@ module.exports = {
     rateRestaurant,
     getOrdersByResId,
     deleteOrder,
+    CheckRate,
 };

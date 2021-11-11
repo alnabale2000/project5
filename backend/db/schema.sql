@@ -1,7 +1,6 @@
 DROP DATABASE IF EXISTS project5;
 CREATE DATABASE project5;
 
-
 USE project5;
 
 CREATE TABLE users (
@@ -44,8 +43,7 @@ CREATE TABLE meals (
     mealImage varchar(255),
     price double(3,2),
     details varchar(255),
-    PRIMARY KEY (id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE comments (
@@ -97,6 +95,7 @@ CREATE TABLE users_address (
 
 CREATE TABLE rates (
     id INT AUTO_INCREMENT NOT NULL,
+    rater_id INT,
     resturant_id INT,
     rate INT,
     PRIMARY KEY(id)

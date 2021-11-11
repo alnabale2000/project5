@@ -56,7 +56,7 @@ const resturantLogin = async (req, res) => {
         if (valid) {
             const payload = {
                 id: id,
-                type: "resturant",
+                type: "restaurant",
             };
 
             const options = {

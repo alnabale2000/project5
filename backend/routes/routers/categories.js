@@ -11,7 +11,7 @@ const categoriesRouter = express.Router();
 
 categoriesRouter.post("/addCategory/:id", addCategory);
 categoriesRouter.get("/categories/:id", getCategoriesByResturantId);
-categoriesRouter.get("/resturants/categories/meals/:id", getMealsByCategoryId);
-categoriesRouter.delete("/delete_category", deleteCategory);
+categoriesRouter.get("/categories/meals/:id", getMealsByCategoryId);
+categoriesRouter.post("/delete_category", deleteCategory);
 
 module.exports = categoriesRouter;

@@ -8,7 +8,8 @@ const addCategory = (req, res) => {
     const data = [categoryName, id];
     connection.query(query, data, (err, result) => {
         if (err) res.status(404).json(err);
-        res.status(201).json("Category Added");
+        console.log("res", result);
+        res.status(201).json([categoryName, id]);
     });
 };
 
@@ -39,16 +40,16 @@ const getMealsByCategoryId = (req, res) => {
 };
 
 const deleteCategory = (req, res) => {
-    const id = req.body.id;
-    const query = `
-    DELETE categories ,meals FROM categories 
-    INNER JOIN meals 
-    WHERE categories.id=meals.category_id`;
+    const id = req.body.categoryId;
+    console.log("id ", id);
+
+    const query = `DELETE categories , meals  FROM categories  INNER JOIN meals  
+    WHERE categories.id = meals.category_id AND categories.id =? `;
+
     const data = [id];
     connection.query(query, data, (err, result) => {
         if (err) res.status(404).json(err);
-        console.log(result);
-        res.json("Category Deleted");
+        res.json([id, result]);
     });
 };
 module.exports = {
